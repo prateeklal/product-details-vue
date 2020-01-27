@@ -4,10 +4,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   entry: './src/index.js',
-  devtool: 'inline-source-map',
+  devtool: 'inline-cheap-module-source-map',
   devServer: {
     historyApiFallback: true,
     noInfo: true
@@ -66,7 +67,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
-  ]
+  ],
+  externals: [nodeExternals()]
 };
 
 if (process.env.NODE_ENV === 'production') {

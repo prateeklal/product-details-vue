@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./server.js",
     "build": "rimraf dist && NODE_ENV=production webpack --progress",
-    "test": "npm run test"
+    "test": "mochapack --webpack-config webpack.config.js --require test/setup.js **/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -33,10 +33,16 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/runtime": "^7.8.3",
+    "@vue/test-utils": "^1.0.0-beta.31",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
+    "expect": "^25.1.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^4.0.0-beta.11",
+    "jsdom": "^16.0.1",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^7.0.1",
+    "mochapack": "^1.1.13",
     "node-sass": "^4.13.1",
     "opn": "^6.0.0",
     "sass-loader": "^8.0.2",
@@ -48,6 +54,7 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.10.1",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }
