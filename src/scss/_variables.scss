@@ -1,0 +1,9 @@
+$primary-color: #273540;
+$accent-color: #bf8b2f;
+$secondary-color: #dfe7ed;
+
+$browser-context: 16;
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}

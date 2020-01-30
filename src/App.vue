@@ -1,15 +1,13 @@
 <template>
-  <products-list></products-list>
+  <overview></overview>
 </template>
 
 <script>
-import ProductsList from "./components/ProductsList.vue";
+import Overview from "./components/overview/Overview.vue";
 
 export default {
   components: {
-    ProductsList
+    Overview
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

@@ -1,7 +1,7 @@
 <template>
-  <header>
-    
-  </header>
+  <div>
+    I am a shopping cart!
+  </div>
 </template>
 
 <script>
