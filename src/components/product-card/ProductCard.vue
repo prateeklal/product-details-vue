@@ -1,56 +1,34 @@
 <template>
-  <!-- <div>
-    <a :href="product.links.www" target="_blank">
-      <figure>
-        <img :src="product.hero.href" :alt="product.hero.alt" />
-        <div>
-          <img
-            v-for="(image, index) in product.images"
-            :key="index"
-            :src="image.href"
-            :alt="image.alt"
-            class="thumb-img"
-          />
-        </div>
-        <figcaption v-html="product.name" :title="product.name"></figcaption>
-      </figure>
-    </a>
-    <strong>
-      {{ `${currency}${product.priceRange.selling.high}` }}
-    </strong>
-    <sup v-if="product.priceRange.regular">
-      <s>{{ `${currency}${product.priceRange.regular.high}` }}</s>
-    </sup>
-  </div>-->
   <article>
     <figure>
-      <img :src="product.hero.href" alt="product.hero.alt" />
+      <router-link :to="paramsForCarousel">
+        <img :src="hero.href" loading="lazy" :alt="hero.alt" :width="hero.width" />
+      </router-link>
       <div class="thumbnail">
         <img
           v-for="(image, index) in product.images"
           :key="index"
           :src="image.href"
           :alt="image.alt"
+          @mouseenter="updateHeroImage(image)"
+          @mouseleave="resetHeroImage"
         />
       </div>
     </figure>
+
     <div class="row">
       <div class="col-8">
-        <h3 v-html="product.name"></h3>
+        <router-link :to="paramsForCarousel">
+          <h3 v-html="product.name"></h3>
+        </router-link>
         <p>
-          <span v-if="product.priceRange.regular"
-            >Before {{ `${currency}${product.priceRange.regular.high}` }}</span
-          >
-          <span v-else>
-            Low price
-            {{ `${currency}${product.priceRange.selling.low}` }}
-          </span>
+          <span>Regular Price - {{ regularPrice }}</span>
         </p>
       </div>
       <div class="col-4 price">
         <em>
           <span>Now Price</span>
-          <strong>{{ `${currency}${product.priceRange.selling.high}` }}</strong>
+          <strong>{{ nowPrice }}</strong>
         </em>
         <button>
           <v-icon name="shopping-cart"></v-icon>
@@ -62,11 +40,48 @@
 
 <script>
 export default {
-  props: ["product"],
+  props: ["product", "currency"],
+
   data() {
     return {
-      currency: "$"
+      hero: this.product.hero
     };
+  },
+
+  methods: {
+    updateHeroImage(img) {
+      this.hero = img;
+    },
+    resetHeroImage() {
+      this.hero = this.product.hero;
+    }
+  },
+
+  computed: {
+    nowPrice() {
+      return (
+        this.product.priceRange &&
+        this.product.priceRange.selling &&
+        this.currency + this.product.priceRange.selling.low
+      );
+    },
+    regularPrice() {
+      return (
+        this.currency +
+        (this.product.priceRange.regular
+          ? this.product.priceRange.regular.high
+          : this.product.priceRange.selling.high)
+      );
+    },
+    paramsForCarousel() {
+      return {
+        name: "product-carousel",
+        params: {
+          id: this.product.id,
+          images: [this.hero, ...this.product.images]
+        }
+      };
+    }
   }
 };
 </script>
@@ -93,19 +108,20 @@ p {
   font-size: em(12);
   margin-top: em(15);
 }
+
 .thumbnail {
   position: absolute;
   bottom: 0;
   width: 100%;
   text-align: center;
-  padding: 5px 0;
+  padding: em(5) 0;
   opacity: 0.2;
   transition: opacity 0.3s;
 }
 
 .thumbnail img {
   width: 34px;
-  margin: 0 1px;
+  margin: 0 em(5);
   border: 2px solid #fff;
   border-radius: 50%;
   cursor: pointer;
@@ -150,6 +166,7 @@ button {
   border: 1px solid $primary-color;
   margin-top: em(12);
   cursor: pointer;
+  background-color: #fff;
 }
 
 button:hover {

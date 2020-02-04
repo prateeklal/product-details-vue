@@ -3,9 +3,10 @@
     <app-header :name="products.name"></app-header>
     <div class="row product-list">
       <div class="column col-4" v-for="item in products.groups" :key="item.id">
-        <product-card :product="item"></product-card>
+        <product-card :product="item" :currency="currency"></product-card>
       </div>
     </div>
+    <router-view></router-view>
     <shopping-cart></shopping-cart>
   </div>
 </template>
@@ -19,14 +20,17 @@ import ShoppingCart from "../shopping-cart/ShoppingCart.vue";
 export default {
   data() {
     return {
-      products: []
+      products: [],
+      currency: "$"
     };
   },
+
   components: {
     ProductCard,
     ShoppingCart,
     AppHeader
   },
+
   methods: {
     fetchProducts() {
       axios
@@ -39,6 +43,7 @@ export default {
         );
     }
   },
+
   created() {
     this.fetchProducts();
   }

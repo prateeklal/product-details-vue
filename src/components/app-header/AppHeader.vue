@@ -41,7 +41,7 @@ header > div {
 
 h1 {
   font-weight: 300;
-  font-size: 24px;
+  font-size: em(24);
 }
 
 .icon {

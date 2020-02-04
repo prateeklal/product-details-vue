@@ -1,13 +1,3 @@
 <template>
-  <overview></overview>
+  <router-view></router-view>
 </template>
-
-<script>
-import Overview from "./components/overview/Overview.vue";
-
-export default {
-  components: {
-    Overview
-  }
-};
-</script>

@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
   res.send(template);
 });
 
-app.get('/products', async(req, res, next) => {
+app.get('/products', async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   let getResponse = await axios.get("https://www.westelm.com/services/catalog/v4/category/shop/new/all-new/index.json");
