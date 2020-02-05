@@ -15,7 +15,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../scss/_variables";
 
 header {
@@ -28,24 +28,25 @@ header {
   top: 0;
   width: 100%;
   z-index: 2;
-}
-header > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1180px;
-  margin: auto;
-  padding: 0.9375em;
-  max-width: 100%;
-}
 
-h1 {
-  font-weight: 300;
-  font-size: em(24);
-}
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1180px;
+    margin: auto;
+    padding: em(15);
+    max-width: 100%;
+  }
 
-.icon {
-  width: 35px;
-  color: #fff;
+  h1 {
+    font-weight: 300;
+    font-size: em(24);
+  }
+
+  .icon {
+    width: 35px;
+    color: #fff;
+  }
 }
 </style>

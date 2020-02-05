@@ -1,34 +1,39 @@
 <template>
   <div>
-    <app-header :name="products.name"></app-header>
-    <div class="row product-list">
-      <div class="column col-4" v-for="item in products.groups" :key="item.id">
-        <product-card :product="item" :currency="currency"></product-card>
-      </div>
-    </div>
-    <router-view></router-view>
+    <app-header :name="category.name"></app-header>
+    <products-list
+      :products="products"
+      :currency="currency"
+      :totalPages="category.totalPages"
+      :categoryName="category.name"
+      @sortPrice="sortByPrice"
+    ></products-list>
     <shopping-cart></shopping-cart>
+    <router-view :products="products"></router-view>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import ProductCard from "../product-card/ProductCard.vue";
 import AppHeader from "../app-header/AppHeader.vue";
+import ProductsList from "../products-list/ProductsList.vue";
 import ShoppingCart from "../shopping-cart/ShoppingCart.vue";
+import ProductCarousel from "../product-carousel/ProductCarousel.vue";
 
 export default {
   data() {
     return {
+      category: [],
       products: [],
-      currency: "$"
+      currency: "$",
     };
   },
 
   components: {
-    ProductCard,
     ShoppingCart,
-    AppHeader
+    AppHeader,
+    ProductsList,
+    ProductCarousel
   },
 
   methods: {
@@ -36,11 +41,25 @@ export default {
       axios
         .get("/products")
         .then(res => {
-          this.products = res.data;
+          this.category = res.data;
+          this.products = res.data.groups;
         })
         .catch(reject =>
           console.error("The request has failed due to ", reject)
         );
+    },
+    
+    sortByPrice(sortByAsc) {
+      let products = Array.from(this.products);
+      
+      try {
+        products.sort((a, b) => a.priceRange.selling.low - b.priceRange.selling.low);
+        if(!sortByAsc) products.reverse();
+      } catch(error) {
+        console.error('Sorting failed due to ', error);
+      }
+
+      this.products = products;
     }
   },
 

@@ -40,10 +40,11 @@
 
 <script>
 export default {
-  props: ["id", "images"],
+  props: ["id", "images", "products"],
 
   data() {
     return {
+      imgGroup: this.images,
       slideCount: 0,
       currentSlide: "",
       nextSlide: "",
@@ -52,15 +53,21 @@ export default {
     };
   },
 
+  watch: {
+    products(products) {
+      this.getProductById(products, this.id);
+    }
+  },
+
   methods: {
     closeModal() {
       this.$router.push("/");
     },
 
     createSlides() {
-      this.nextSlide = this.getNextSlide(this.slideCount, this.images);
-      this.prevSlide = this.getPrevSlide(this.slideCount, this.images);
-      this.currentSlide = this.images[this.slideCount];
+      this.nextSlide = this.getNextSlide(this.slideCount, this.imgGroup);
+      this.prevSlide = this.getPrevSlide(this.slideCount, this.imgGroup);
+      this.currentSlide = this.imgGroup[this.slideCount];
     },
 
     getNextSlide(slideCount, images) {
@@ -75,11 +82,17 @@ export default {
 
     getPrevSlide(slideCount, images) {
       return slideCount > 0 ? images[slideCount - 1] : "";
+    },
+
+    getProductById(products, id) {
+      let product = products.filter(product => id === product.id);
+      this.imgGroup = [product[0].hero, ...product[0].images];
+      this.createSlides();
     }
   },
 
   created() {
-    return this.images && this.createSlides();
+    return this.imgGroup && this.createSlides();
   },
 
   mounted() {

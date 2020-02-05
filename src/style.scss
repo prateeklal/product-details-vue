@@ -15,6 +15,10 @@ body {
   background-color: $secondary-color;
 }
 
+#app[v-cloak] {
+  display: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;

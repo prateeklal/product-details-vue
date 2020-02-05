@@ -1,0 +1,83 @@
+<template>
+  <main class="row product-list">
+    <div class="col-12">
+      <div class="row products-header">
+        <p>
+          Displaying {{ products && products.length }} products for
+          <b>{{ categoryName }}</b>
+        </p>
+        <button @click="sortPrice">
+          Sort by price
+          <v-icon name="trello"></v-icon>
+        </button>
+      </div>
+      <div class="row">
+        <div class="column col-4" v-for="item in products" :key="item.id">
+          <product-card :product="item" :currency="currency"></product-card>
+        </div>
+      </div>
+    </div>
+  </main>
+</template>
+
+<script>
+import ProductCard from "../product-card/ProductCard.vue";
+
+export default {
+  props: ["products", "currency", "totalPages", "categoryName"],
+  data() {
+    return {
+      sortByAsc: false
+    }
+  },
+  components: {
+    ProductCard
+  },
+  methods: {
+    sortPrice() {
+      this.sortByAsc = !this.sortByAsc;
+      this.$emit('sortPrice', this.sortByAsc);
+    }
+  },
+};
+</script>
+
+<style lang="scss">
+@import "../../scss/_variables";
+
+.products-header {
+  padding: em(10);
+  align-items: flex-end;
+
+  p {
+    font-size: 14px;
+  }
+
+  button {
+    border: 2px solid $primary-color;
+    padding: em(8) em(12);
+    border-radius: 20px;
+    font-size: em(12);
+    display: flex;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    background-color: #fff;
+    width: 120px;
+
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+
+      .icon {
+        color: #fff;
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+</style>
