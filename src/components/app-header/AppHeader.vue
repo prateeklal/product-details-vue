@@ -1,7 +1,9 @@
 <template>
   <header>
     <div>
-      <h1>West Elm | {{ name }}</h1>
+      <h1>
+        <span>West Elm</span> | <span>{{ name }}</span>
+      </h1>
       <div>
         <v-icon name="shopping-cart"></v-icon>
       </div>
@@ -11,7 +13,21 @@
 
 <script>
 export default {
-  props: ["name"]
+  props: ["name"],
+  data() {
+    return {
+      // rotateText: false,
+      // bounceCategoryText: false
+    };
+  },
+  mounted() {
+    // setTimeout(() => {
+    //   this.rotateText = true;
+    // }, 3000);
+    // setTimeout(() => {
+    //   this.bounceCategoryText = true;
+    // }, 4000);
+  }
 };
 </script>
 
@@ -39,9 +55,50 @@ header {
     max-width: 100%;
   }
 
+  @keyframes rotateText {
+    from {
+      transform: rotateX(0deg);
+    }
+    50% {
+      transform: rotateX(180deg);
+    }
+    to {
+      transform: rotateX(0deg);
+    }
+  }
+
+  @keyframes slideText {
+    from {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
   h1 {
     font-weight: 300;
     font-size: em(24);
+
+    span:first-of-type {
+      animation-name: rotateText;
+      animation-duration: 1s;
+      animation-delay: 3000ms;
+    }
+
+    span:nth-of-type(2) {
+      animation-name: slideText;
+      animation-duration: 1s;
+      animation-delay: 4000ms;
+    }
+
+    span {
+      display: inline-block;
+      margin-left: 5px;
+    }
   }
 
   .icon {

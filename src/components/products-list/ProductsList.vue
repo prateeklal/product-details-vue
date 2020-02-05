@@ -6,16 +6,16 @@
           Displaying {{ products && products.length }} products for
           <b>{{ categoryName }}</b>
         </p>
-        <button @click="sortPrice">
+        <button @click="sortPrice" :class="{ active: sortByAsc }">
           Sort by price
           <v-icon name="trello"></v-icon>
         </button>
       </div>
-      <div class="row">
+      <transition-group name="shuffle" tag="div" class="row">
         <div class="column col-4" v-for="item in products" :key="item.id">
           <product-card :product="item" :currency="currency"></product-card>
         </div>
-      </div>
+      </transition-group>
     </div>
   </main>
 </template>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       sortByAsc: false
-    }
+    };
   },
   components: {
     ProductCard
@@ -36,9 +36,9 @@ export default {
   methods: {
     sortPrice() {
       this.sortByAsc = !this.sortByAsc;
-      this.$emit('sortPrice', this.sortByAsc);
+      this.$emit("sortPrice", this.sortByAsc);
     }
-  },
+  }
 };
 </script>
 
@@ -78,6 +78,14 @@ export default {
     &:focus {
       outline: none;
     }
+
+    &.active .icon {
+      transform: rotate(-180deg);
+    }
   }
+}
+
+.shuffle-move {
+  transition: transform .5s;
 }
 </style>
