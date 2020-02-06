@@ -4,7 +4,7 @@
       <h1>
         <span>West Elm</span> | <span>{{ name }}</span>
       </h1>
-      <div>
+      <div class="cart" @click="displayCart">
         <v-icon name="shopping-cart"></v-icon>
       </div>
     </div>
@@ -14,20 +14,11 @@
 <script>
 export default {
   props: ["name"],
-  data() {
-    return {
-      // rotateText: false,
-      // bounceCategoryText: false
-    };
+  methods: {
+    displayCart() {
+      this.$emit('toggleCart');
+    }
   },
-  mounted() {
-    // setTimeout(() => {
-    //   this.rotateText = true;
-    // }, 3000);
-    // setTimeout(() => {
-    //   this.bounceCategoryText = true;
-    // }, 4000);
-  }
 };
 </script>
 
@@ -83,6 +74,10 @@ header {
     font-weight: 300;
     font-size: em(24);
 
+    @media(max-width: 479px) {
+      font-size: em(20);
+    }
+
     span:first-of-type {
       animation-name: rotateText;
       animation-duration: 1s;
@@ -104,6 +99,14 @@ header {
   .icon {
     width: 35px;
     color: #fff;
+
+    @media(max-width: 479px) {
+      width: 30px;
+    }
+  }
+
+  .cart {
+    cursor: pointer;
   }
 }
 </style>

@@ -12,7 +12,7 @@
         </button>
       </div>
       <transition-group name="shuffle" tag="div" class="row">
-        <div class="column col-4" v-for="item in products" :key="item.id">
+        <div class="column col-12 sm-col-6 md-col-4" v-for="item in products" :key="item.id">
           <product-card :product="item" :currency="currency"></product-card>
         </div>
       </transition-group>
@@ -50,7 +50,11 @@ export default {
   align-items: flex-end;
 
   p {
-    font-size: 14px;
+    font-size: em(14);
+
+    @media (max-width: 479px) {
+      font-size: em(13);
+    }
   }
 
   button {

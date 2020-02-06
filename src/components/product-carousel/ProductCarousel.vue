@@ -188,6 +188,10 @@ figure {
     position: absolute;
     width: 80px;
     top: -(em(14));
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 }
 

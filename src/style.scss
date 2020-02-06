@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
-@import './scss/variables';
+@import "./scss/variables";
 * {
   margin: 0;
   padding: 0;
@@ -34,6 +34,12 @@ a {
   }
 }
 
+.icon {
+  width: 20px;
+  color: $primary-color;
+}
+
+// Width for various screen sizes
 .col-12 {
   width: 100%;
 }
@@ -71,7 +77,80 @@ a {
   width: 8.33333333%;
 }
 
-.icon {
-  width: 20px;
-  color: $primary-color;
+@media (min-width: 480px) {
+  .sm-col-12 {
+    width: 100%;
+  }
+  .sm-col-11 {
+    width: 91.66666667%;
+  }
+  .sm-col-10 {
+    width: 83.33333333%;
+  }
+  .sm-col-9 {
+    width: 75%;
+  }
+  .sm-col-8 {
+    width: 66.66666667%;
+  }
+  .sm-col-7 {
+    width: 58.33333333%;
+  }
+  .sm-col-6 {
+    width: 50%;
+  }
+  .sm-col-5 {
+    width: 41.66666667%;
+  }
+  .sm-col-4 {
+    width: 33.33333333%;
+  }
+  .sm-col-3 {
+    width: 25%;
+  }
+  .sm-col-2 {
+    width: 16.66666667%;
+  }
+  .sm-col-1 {
+    width: 8.33333333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .md-col-12 {
+    width: 100%;
+  }
+  .md-col-11 {
+    width: 91.66666667%;
+  }
+  .md-col-10 {
+    width: 83.33333333%;
+  }
+  .md-col-9 {
+    width: 75%;
+  }
+  .md-col-8 {
+    width: 66.66666667%;
+  }
+  .md-col-7 {
+    width: 58.33333333%;
+  }
+  .md-col-6 {
+    width: 50%;
+  }
+  .md-col-5 {
+    width: 41.66666667%;
+  }
+  .md-col-4 {
+    width: 33.33333333%;
+  }
+  .md-col-3 {
+    width: 25%;
+  }
+  .md-col-2 {
+    width: 16.66666667%;
+  }
+  .md-col-1 {
+    width: 8.33333333%;
+  }
 }
