@@ -2,7 +2,7 @@
   <main class="row product-list">
     <div class="col-12">
       <div class="row products-header">
-        <p>
+        <p tabindex="0">
           Displaying {{ products && products.length }} products for
           <b>{{ categoryName }}</b>
         </p>
@@ -77,10 +77,6 @@ export default {
       .icon {
         color: #fff;
       }
-    }
-
-    &:focus {
-      outline: none;
     }
 
     &.active .icon {

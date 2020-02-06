@@ -1,28 +1,28 @@
 <template>
-  <header>
+  <header :class="{ progress: loading }">
     <div>
-      <h1>
+      <h1 tabindex="0">
         <span>West Elm</span> | <span>{{ name }}</span>
       </h1>
-      <div class="cart" @click="displayCart">
+      <button class="cart" @click="displayCart" aria-label="View Shopping Cart">
         <v-icon name="shopping-cart"></v-icon>
-      </div>
+      </button>
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  props: ["name"],
+  props: ["name", "loading"],
   methods: {
     displayCart() {
-      this.$emit('toggleCart');
+      this.$emit("toggleCart");
     }
-  },
+  }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 @import "../../scss/_variables";
 
 header {
@@ -35,16 +35,6 @@ header {
   top: 0;
   width: 100%;
   z-index: 2;
-
-  > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1180px;
-    margin: auto;
-    padding: em(15);
-    max-width: 100%;
-  }
 
   @keyframes rotateText {
     from {
@@ -70,11 +60,64 @@ header {
     }
   }
 
+  @keyframes progressBar {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes hideProgressBar {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1180px;
+    margin: auto;
+    padding: em(15);
+    max-width: 100%;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    opacity: 0;
+    background-color: $accent-color;
+    transition: opacity .3s;
+    transition-delay: .4s;
+    transform-origin: left;
+    animation-name: progressBar;
+    animation-duration: 10s;
+    animation-timing-function: step-start;
+    animation-iteration-count: infinite;
+  }
+
+  &.progress::after {
+    animation-timing-function: linear;
+    opacity: 1;
+  }
+
   h1 {
     font-weight: 300;
     font-size: em(24);
 
-    @media(max-width: 479px) {
+    @media (max-width: 479px) {
       font-size: em(20);
     }
 
@@ -100,13 +143,15 @@ header {
     width: 35px;
     color: #fff;
 
-    @media(max-width: 479px) {
+    @media (max-width: 479px) {
       width: 30px;
     }
   }
 
   .cart {
     cursor: pointer;
+    background-color: transparent;
+    border: none;
   }
 }
 </style>

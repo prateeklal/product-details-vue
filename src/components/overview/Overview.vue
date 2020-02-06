@@ -1,6 +1,11 @@
 <template>
   <div>
-    <app-header :name="category.name" @toggleCart="toggleCart"></app-header>
+    <app-header
+      tabindex="0"
+      :name="category.name"
+      @toggleCart="toggleCart"
+      :loading="loading"
+    ></app-header>
 
     <products-list
       :products="products"
@@ -35,7 +40,8 @@ export default {
       category: [],
       products: [],
       currency: "$",
-      displayCart: false
+      displayCart: false,
+      loading: false
     };
   },
 
@@ -48,11 +54,13 @@ export default {
 
   methods: {
     fetchProducts() {
+      this.loading = true;
       axios
         .get("/products")
         .then(res => {
           this.category = res.data;
           this.products = res.data.groups;
+          this.loading = false;
         })
         .catch(reject =>
           console.error("The request has failed due to ", reject)
@@ -91,8 +99,8 @@ export default {
 .product-list {
   margin-top: em(110);
 
-  @media(max-width: 479px) {
-    margin-top: em(80); 
+  @media (max-width: 479px) {
+    margin-top: em(80);
   }
 }
 

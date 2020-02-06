@@ -2,7 +2,7 @@
   <article>
     <figure>
       <router-link :to="paramsForCarousel">
-        <img :src="hero.href" loading="lazy" :alt="hero.alt" :width="hero.width" />
+        <img :src="hero.href" loading="lazy" :alt="hero.alt" :width="hero.width" aria-label="Main image of the product"/>
       </router-link>
       <div class="thumbnail">
         <img
@@ -21,16 +21,16 @@
         <router-link :to="paramsForCarousel">
           <h3 v-html="product.name"></h3>
         </router-link>
-        <p>
+        <p tabindex="0">
           <span>Regular Price - {{ regularPrice }}</span>
         </p>
       </div>
       <div class="col-4 price">
-        <em>
+        <em tabindex="0">
           <span>Now Price</span>
           <strong>{{ nowPrice }}</strong>
         </em>
-        <button>
+        <button aria-label="Add to cart">
           <v-icon name="shopping-cart"></v-icon>
         </button>
       </div>
