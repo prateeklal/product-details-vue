@@ -3,17 +3,30 @@
     <div class="col-12">
       <div class="row products-header">
         <p tabindex="0">
-          Displaying {{ products && products.length }} products for
-          <b>{{ categoryName }}</b>
+          <span v-if="!loading">
+            Displaying {{ products && products.length }} products for
+            <b>{{ categoryName }}</b>
+          </span>
         </p>
-        <button @click="sortPrice" :class="{ active: sortByAsc }">
+        <button
+          @click="sortPrice"
+          :class="{ active: sortByAsc }"
+          v-if="!loading"
+        >
           Sort by price
           <v-icon name="trello"></v-icon>
         </button>
       </div>
       <transition-group name="shuffle" tag="div" class="row">
-        <div class="column col-12 sm-col-6 md-col-4" v-for="item in products" :key="item.id">
-          <product-card :product="item" :currency="currency"></product-card>
+        <div
+          class="column col-12 sm-col-6 md-col-4"
+          v-for="item in products"
+          :key="item.id"
+        >
+          <product-card
+            :product="item"
+            @addToCart="addToCart"
+          ></product-card>
         </div>
       </transition-group>
     </div>
@@ -24,7 +37,7 @@
 import ProductCard from "../product-card/ProductCard.vue";
 
 export default {
-  props: ["products", "currency", "totalPages", "categoryName"],
+  props: ["products", "totalPages", "categoryName", "loading"],
   data() {
     return {
       sortByAsc: false
@@ -37,6 +50,9 @@ export default {
     sortPrice() {
       this.sortByAsc = !this.sortByAsc;
       this.$emit("sortPrice", this.sortByAsc);
+    },
+    addToCart(cartItems) {
+      this.$emit("addToCart", cartItems);
     }
   }
 };
@@ -86,6 +102,6 @@ export default {
 }
 
 .shuffle-move {
-  transition: transform .5s;
+  transition: transform 0.5s;
 }
 </style>

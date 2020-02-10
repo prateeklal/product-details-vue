@@ -4,17 +4,19 @@
       <figure>
         <img
           loading="eager"
-          :src="currentSlide.href"
+          v-lazy="currentSlide.href"
           :alt="currentSlide.alt"
           :width="currentSlide.width"
           :height="currentSlide.height"
         />
       </figure>
+      <button @click="closeModal" aria-label="Close the modal">Close</button>
     </div>
     <div class="chevron">
-      <div
+      <button
         v-if="prevSlide"
         class="prev"
+        aria-label="Previous Slide"
         @click="
           slideCount--;
           createSlides();
@@ -22,10 +24,11 @@
       >
         <img :src="prevSlide.href" :alt="prevSlide.alt" />
         <v-icon name="chevron-left"></v-icon>
-      </div>
-      <div
+      </button>
+      <button
         v-if="nextSlide"
         class="next"
+        aria-label="Next Slide"
         @click="
           slideCount++;
           createSlides();
@@ -33,7 +36,7 @@
       >
         <img :src="nextSlide.href" :alt="nextSlide.alt" />
         <v-icon name="chevron-right"></v-icon>
-      </div>
+      </button>
     </div>
   </div>
 </template>
@@ -144,6 +147,21 @@ div.modal-container::before {
   overflow: auto;
   transition: transform 0.3s ease-in-out;
   transform: scale(0);
+
+  button {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: em(11);
+    border-bottom: 1px solid $primary-color;
+    cursor: pointer;
+
+    &:hover {
+      border: none;
+    }
+  }
 }
 
 .modal-open {
@@ -172,25 +190,27 @@ figure {
   z-index: 5;
   left: 0;
   width: 100%;
-}
 
-.chevron .icon {
-  width: 50px;
-  color: #fff;
-  stroke-width: 1px;
-}
+  .icon {
+    width: 50px;
+    color: #fff;
+    stroke-width: 1px;
+  }
 
-.chevron > div {
-  cursor: pointer;
-  position: absolute;
-
-  > img {
+  & > button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
     position: absolute;
-    width: 80px;
-    top: -(em(14));
 
-    @media (max-width: 767px) {
-      display: none;
+    > img {
+      position: absolute;
+      width: 80px;
+      top: -(em(14));
+
+      @media (max-width: 767px) {
+        display: none;
+      }
     }
   }
 }

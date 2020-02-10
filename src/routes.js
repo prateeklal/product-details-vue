@@ -12,11 +12,12 @@ export default [
         name: 'product-carousel',
         props: true,
         component: ProductCarousel
+      },
+      {
+        path: '/cart',
+        props: true,
+        component: ShoppingCart
       }
     ]
-  },
-  {
-    path: '/shopping-cart',
-    component: ShoppingCart
   }
 ]

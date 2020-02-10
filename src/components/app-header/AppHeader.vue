@@ -5,6 +5,7 @@
         <span>West Elm</span> | <span>{{ name }}</span>
       </h1>
       <button class="cart" @click="displayCart" aria-label="View Shopping Cart">
+        <span v-if="cart.length" class="cart-item">{{ totalItems }}</span>
         <v-icon name="shopping-cart"></v-icon>
       </button>
     </div>
@@ -13,16 +14,23 @@
 
 <script>
 export default {
-  props: ["name", "loading"],
+  props: ["name", "loading", "cart"],
   methods: {
     displayCart() {
       this.$emit("toggleCart");
+    }
+  },
+  computed: {
+    totalItems() {
+      return this.cart.reduce((accumulator, product) => {
+        return accumulator + product.qty;
+      }, 0);
     }
   }
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 @import "../../scss/_variables";
 
 header {
@@ -80,6 +88,18 @@ header {
     }
   }
 
+  @keyframes bounceCartCount {
+    from {
+      transform: translateY(-30px);
+    }
+    80% {
+      transform: translateY(5px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
   > div {
     display: flex;
     justify-content: space-between;
@@ -99,8 +119,8 @@ header {
     width: 100%;
     opacity: 0;
     background-color: $accent-color;
-    transition: opacity .3s;
-    transition-delay: .4s;
+    transition: opacity 0.3s;
+    transition-delay: 0.4s;
     transform-origin: left;
     animation-name: progressBar;
     animation-duration: 10s;
@@ -152,6 +172,27 @@ header {
     cursor: pointer;
     background-color: transparent;
     border: none;
+    position: relative;
+  }
+
+  .cart-item {
+    position: absolute;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 12px;
+    top: -7px;
+    background-color: #fff;
+    right: -3px;
+    text-align: center;
+    border: 1px solid #273540;
+    padding: 0 em(3);
+    font-size: em(13);
+    line-height: 15px;
+    font-weight: bold;
+    z-index: 5;
+    animation-name: bounceCartCount;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(1, 0, 0, 1);
   }
 }
 </style>

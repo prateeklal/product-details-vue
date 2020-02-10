@@ -2,35 +2,40 @@
   <article>
     <figure>
       <router-link :to="paramsForCarousel">
-        <img :src="hero.href" loading="lazy" :alt="hero.alt" :width="hero.width" aria-label="Main image of the product"/>
+        <img
+          v-lazy="hero.href"
+          loading="lazy"
+          :alt="hero.alt"
+          :width="hero.width"
+          aria-label="Main image of the product"
+        />
       </router-link>
-      <div class="thumbnail">
+      <div class="thumbnail" @mouseleave="resetHeroImage">
         <img
           v-for="(image, index) in product.images"
           :key="index"
           :src="image.href"
           :alt="image.alt"
           @mouseenter="updateHeroImage(image)"
-          @mouseleave="resetHeroImage"
         />
       </div>
     </figure>
 
-    <div class="row">
+    <div class="row article-body">
       <div class="col-8">
         <router-link :to="paramsForCarousel">
           <h3 v-html="product.name"></h3>
         </router-link>
         <p tabindex="0">
-          <span>Regular Price - {{ regularPrice }}</span>
+          <span>Regular Price - {{ regularPrice | currency }}</span>
         </p>
       </div>
       <div class="col-4 price">
         <em tabindex="0">
           <span>Now Price</span>
-          <strong>{{ nowPrice }}</strong>
+          <strong>{{ nowPrice | currency }}</strong>
         </em>
-        <button aria-label="Add to cart">
+        <button aria-label="Add to cart" @click="addToCart">
           <v-icon name="shopping-cart"></v-icon>
         </button>
       </div>
@@ -40,7 +45,7 @@
 
 <script>
 export default {
-  props: ["product", "currency"],
+  props: ["product"],
 
   data() {
     return {
@@ -54,6 +59,16 @@ export default {
     },
     resetHeroImage() {
       this.hero = this.product.hero;
+    },
+    addToCart() {
+      const cartItems = {
+        id: this.product.id,
+        name: this.product.name,
+        price: this.nowPrice,
+        thumb: this.product.thumbnail
+      };
+
+      this.$emit("addToCart", cartItems);
     }
   },
 
@@ -62,16 +77,13 @@ export default {
       return (
         this.product.priceRange &&
         this.product.priceRange.selling &&
-        this.currency + this.product.priceRange.selling.low
+        this.product.priceRange.selling.low
       );
     },
     regularPrice() {
-      return (
-        this.currency +
-        (this.product.priceRange.regular
-          ? this.product.priceRange.regular.high
-          : this.product.priceRange.selling.high)
-      );
+      return this.product.priceRange.regular
+        ? this.product.priceRange.regular.high
+        : this.product.priceRange.selling.high;
     },
     paramsForCarousel() {
       return {
@@ -135,7 +147,7 @@ figure:hover .thumbnail {
   opacity: 1;
 }
 
-figure + div {
+.article-body {
   padding: em(10) em(15) em(15);
 }
 
