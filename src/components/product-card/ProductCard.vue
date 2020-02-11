@@ -51,7 +51,12 @@
 
 <script>
 export default {
-  props: ["product"],
+  props: {
+    product: {
+      type: Object,
+      default: () => {}
+    },
+  },
 
   data() {
     return {

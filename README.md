@@ -27,7 +27,9 @@ Uses [webpackDevMiddleware](https://github.com/webpack/webpack-dev-middleware) t
 ## Testing & Coverage
 This app uses the utility jest for the test and coverage.
 Creates a `coverage` folder with the report
+
 <br/>
+
 Run the tests with coverage report
 ```bash
 npm run test
