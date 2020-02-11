@@ -4,9 +4,16 @@
       <h1 tabindex="0">
         <span>West Elm</span> | <span>{{ name }}</span>
       </h1>
-      <button class="cart" @click="displayCart" aria-label="View Shopping Cart">
-        <span v-if="cart.length" class="cart-item">{{ totalItems }}</span>
-        <v-icon name="shopping-cart"></v-icon>
+      <button
+        class="cart"
+        aria-label="View Shopping Cart"
+        @click="displayCart"
+      >
+        <span
+          v-if="cart.length"
+          class="cart-item"
+        >{{ totalItems }}</span>
+        <v-icon name="shopping-cart" />
       </button>
     </div>
   </header>
@@ -15,16 +22,16 @@
 <script>
 export default {
   props: ["name", "loading", "cart"],
-  methods: {
-    displayCart() {
-      this.$emit("toggleCart");
-    }
-  },
   computed: {
     totalItems() {
       return this.cart.reduce((accumulator, product) => {
         return accumulator + product.qty;
       }, 0);
+    }
+  },
+  methods: {
+    displayCart() {
+      this.$emit("toggleCart");
     }
   }
 };

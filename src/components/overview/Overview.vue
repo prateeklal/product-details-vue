@@ -4,36 +4,36 @@
       tabindex="0"
       :name="category.name"
       :cart="cart"
-      @toggleCart="toggleCart"
       :loading="loading"
-    ></app-header>
+      @toggleCart="toggleCart"
+    />
 
     <products-list
       :products="products"
-      :totalPages="category.totalPages"
-      :categoryName="category.name"
+      :total-pages="category.totalPages"
+      :category-name="category.name"
+      :loading="loading"
       @sortPrice="sortByPrice"
       @addToCart="addToCart"
-      :loading="loading"
-    ></products-list>
+    />
 
-    <div v-show="displayCart" class="bg-overlay" @click.self="toggleCart"></div>
+    <div v-show="displayCart" class="bg-overlay" @click.self="toggleCart" />
     <transition name="slide-cart">
       <shopping-cart
         v-show="displayCart"
-        @toggleCart="toggleCart"
         :cart="cart"
-        :totalPrice="totalPrice"
+        :total-price="totalPrice"
+        @toggleCart="toggleCart"
         @increaseQty="increaseQty"
         @decreaseQty="decreaseQty"
-      ></shopping-cart>
+      />
     </transition>
 
     <transition name="fade-snack">
-      <snack-bar v-if="notifyMsg" :notifyMsg="notifyMsg"> </snack-bar>
+      <snack-bar v-if="notifyMsg" :notify-msg="notifyMsg" />
     </transition>
 
-    <router-view :products="products"></router-view>
+    <router-view :products="products" />
   </div>
 </template>
 
@@ -42,10 +42,15 @@ import axios from "axios";
 import AppHeader from "../app-header/AppHeader.vue";
 import ProductsList from "../products-list/ProductsList.vue";
 import ShoppingCart from "../shopping-cart/ShoppingCart.vue";
-import ProductCarousel from "../product-carousel/ProductCarousel.vue";
 import SnackBar from "../snackbar/SnackBar.vue";
 
 export default {
+  components: {
+    ShoppingCart,
+    AppHeader,
+    ProductsList,
+    SnackBar
+  },
   data() {
     return {
       category: [],
@@ -58,12 +63,8 @@ export default {
     };
   },
 
-  components: {
-    ShoppingCart,
-    AppHeader,
-    ProductsList,
-    ProductCarousel,
-    SnackBar
+  created() {
+    this.fetchProducts();
   },
 
   methods: {
@@ -136,10 +137,6 @@ export default {
         this.cart.splice(productPosition, 1);
       }
     }
-  },
-
-  created() {
-    this.fetchProducts();
   }
 };
 </script>

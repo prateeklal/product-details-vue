@@ -4,9 +4,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: './src/index.js',
+  externals: [nodeExternals()],
   devtool: 'inline-cheap-module-source-map',
   devServer: {
     historyApiFallback: true,
@@ -41,7 +43,6 @@ module.exports = {
         options: {
           loaders: {
             'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
             'js': 'babel-loader?presets[]=env'
           }
         }
@@ -87,5 +88,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
+  ]);
 }

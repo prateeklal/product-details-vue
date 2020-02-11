@@ -11,15 +11,23 @@
           <img :src="product.thumb.href" :alt="product.thumb.alt" />
         </figure>
         <div class="col-9">
-          <div class="item-title" v-html="product.name"></div>
+          <div class="item-title" v-html="product.name" />
           <span class="item-qty">
             {{ product.price | currency }} x {{ product.qty }}
           </span>
-          <button class="btn" @click="inc(product)">
-            <v-icon name="plus"></v-icon>
+          <button
+            class="btn inc-qty"
+            aria-label="Increase quantity"
+            @click="inc(product)"
+          >
+            <v-icon name="plus" />
           </button>
-          <button class="btn" @click="dec(product)">
-            <v-icon name="minus"></v-icon>
+          <button
+            class="btn dec-qty"
+            aria-label="Reduce quantity"
+            @click="dec(product)"
+          >
+            <v-icon name="minus" />
           </button>
         </div>
       </li>
@@ -33,7 +41,16 @@
 
 <script>
 export default {
-  props: ["cart", "totalPrice"],
+  props: {
+    cart: {
+      type: Array,
+      default: () => []
+    },
+    totalPrice: {
+      type: Number,
+      default: 0
+    }
+  },
   methods: {
     inc(product) {
       this.$emit("increaseQty", product);

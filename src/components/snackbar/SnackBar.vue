@@ -1,6 +1,6 @@
 <template>
   <div :class="{ snackbar: true, 'hide-snack': !showSnack }">
-    <p v-html="notifyMsg"></p>
+    <p v-html="notifyMsg" />
   </div>
 </template>
 
@@ -20,6 +20,9 @@ export default {
       this.setSnackTimeout();
     }
   },
+  mounted() {
+    this.setSnackTimeout();
+  },
   methods: {
     setSnackTimeout() {
       window.clearTimeout(this.activeTimeout);
@@ -28,9 +31,6 @@ export default {
         this.showSnack = false;
       }, this.timeout);
     }
-  },
-  mounted() {
-    this.setSnackTimeout();
   }
 };
 </script>
@@ -73,7 +73,7 @@ export default {
   transform: translateX(350px);
 
   @media (max-width: 479px) {
-  transform: translateY(350px);
+    transform: translateY(350px);
   }
 }
 </style>

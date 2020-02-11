@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueIcon from 'vue-icon';
 import VueLazyload from 'vue-lazyload';
-import App from './App.vue'
+import VueRouter from 'vue-router';
+import App from './App.vue';
 import routes from './routes';
 import loadingImg from './assets/loading.gif';
 import './style.scss';
@@ -23,7 +24,6 @@ Vue.filter('currency', function (price) {
   return `$${price.toFixed(2)}`;
 });
 
-import VueRouter from 'vue-router';
 const router = new VueRouter({
   routes
 });

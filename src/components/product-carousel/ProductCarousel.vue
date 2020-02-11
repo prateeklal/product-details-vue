@@ -1,16 +1,24 @@
 <template>
-  <div class="modal-container" @click.self="closeModal">
+  <div
+    class="modal-container"
+    @click.self="closeModal"
+  >
     <div :class="{ modal: true, 'modal-open': modalOpenAnimation }">
       <figure>
         <img
-          loading="eager"
           v-lazy="currentSlide.href"
+          loading="eager"
           :alt="currentSlide.alt"
           :width="currentSlide.width"
           :height="currentSlide.height"
-        />
+        >
       </figure>
-      <button @click="closeModal" aria-label="Close the modal">Close</button>
+      <button
+        aria-label="Close the modal"
+        @click="closeModal"
+      >
+        Close
+      </button>
     </div>
     <div class="chevron">
       <button
@@ -22,8 +30,11 @@
           createSlides();
         "
       >
-        <img :src="prevSlide.href" :alt="prevSlide.alt" />
-        <v-icon name="chevron-left"></v-icon>
+        <img
+          :src="prevSlide.href"
+          :alt="prevSlide.alt"
+        >
+        <v-icon name="chevron-left" />
       </button>
       <button
         v-if="nextSlide"
@@ -34,8 +45,11 @@
           createSlides();
         "
       >
-        <img :src="nextSlide.href" :alt="nextSlide.alt" />
-        <v-icon name="chevron-right"></v-icon>
+        <img
+          :src="nextSlide.href"
+          :alt="nextSlide.alt"
+        >
+        <v-icon name="chevron-right" />
       </button>
     </div>
   </div>
@@ -60,6 +74,16 @@ export default {
     products(products) {
       this.getProductById(products, this.id);
     }
+  },
+
+  created() {
+    return this.imgGroup && this.createSlides();
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.modalOpenAnimation = true;
+    }, 100);
   },
 
   methods: {
@@ -92,16 +116,6 @@ export default {
       this.imgGroup = [product[0].hero, ...product[0].images];
       this.createSlides();
     }
-  },
-
-  created() {
-    return this.imgGroup && this.createSlides();
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.modalOpenAnimation = true;
-    }, 100);
   }
 };
 </script>

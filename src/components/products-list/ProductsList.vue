@@ -9,24 +9,28 @@
           </span>
         </p>
         <button
-          @click="sortPrice"
-          :class="{ active: sortByAsc }"
           v-if="!loading"
+          :class="{ active: sortByAsc }"
+          @click="sortPrice"
         >
           Sort by price
-          <v-icon name="trello"></v-icon>
+          <v-icon name="trello" />
         </button>
       </div>
-      <transition-group name="shuffle" tag="div" class="row">
+      <transition-group
+        name="shuffle"
+        tag="div"
+        class="row"
+      >
         <div
-          class="column col-12 sm-col-6 md-col-4"
           v-for="item in products"
           :key="item.id"
+          class="column col-12 sm-col-6 md-col-4"
         >
           <product-card
             :product="item"
             @addToCart="addToCart"
-          ></product-card>
+          />
         </div>
       </transition-group>
     </div>
@@ -37,14 +41,14 @@
 import ProductCard from "../product-card/ProductCard.vue";
 
 export default {
+  components: {
+    ProductCard
+  },
   props: ["products", "totalPages", "categoryName", "loading"],
   data() {
     return {
       sortByAsc: false
     };
-  },
-  components: {
-    ProductCard
   },
   methods: {
     sortPrice() {

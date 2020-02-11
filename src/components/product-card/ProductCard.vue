@@ -8,23 +8,26 @@
           :alt="hero.alt"
           :width="hero.width"
           aria-label="Main image of the product"
-        />
+        >
       </router-link>
-      <div class="thumbnail" @mouseleave="resetHeroImage">
+      <div
+        class="thumbnail"
+        @mouseleave="resetHeroImage"
+      >
         <img
           v-for="(image, index) in product.images"
           :key="index"
           :src="image.href"
           :alt="image.alt"
           @mouseenter="updateHeroImage(image)"
-        />
+        >
       </div>
     </figure>
 
     <div class="row article-body">
       <div class="col-8">
         <router-link :to="paramsForCarousel">
-          <h3 v-html="product.name"></h3>
+          <h3 v-html="product.name" />
         </router-link>
         <p tabindex="0">
           <span>Regular Price - {{ regularPrice | currency }}</span>
@@ -35,8 +38,11 @@
           <span>Now Price</span>
           <strong>{{ nowPrice | currency }}</strong>
         </em>
-        <button aria-label="Add to cart" @click="addToCart">
-          <v-icon name="shopping-cart"></v-icon>
+        <button
+          aria-label="Add to cart"
+          @click="addToCart"
+        >
+          <v-icon name="shopping-cart" />
         </button>
       </div>
     </div>
@@ -51,25 +57,6 @@ export default {
     return {
       hero: this.product.hero
     };
-  },
-
-  methods: {
-    updateHeroImage(img) {
-      this.hero = img;
-    },
-    resetHeroImage() {
-      this.hero = this.product.hero;
-    },
-    addToCart() {
-      const cartItems = {
-        id: this.product.id,
-        name: this.product.name,
-        price: this.nowPrice,
-        thumb: this.product.thumbnail
-      };
-
-      this.$emit("addToCart", cartItems);
-    }
   },
 
   computed: {
@@ -93,6 +80,25 @@ export default {
           images: [this.hero, ...this.product.images]
         }
       };
+    }
+  },
+
+  methods: {
+    updateHeroImage(img) {
+      this.hero = img;
+    },
+    resetHeroImage() {
+      this.hero = this.product.hero;
+    },
+    addToCart() {
+      const cartItems = {
+        id: this.product.id,
+        name: this.product.name,
+        price: this.nowPrice,
+        thumb: this.product.thumbnail
+      };
+
+      this.$emit("addToCart", cartItems);
     }
   }
 };
