@@ -44,7 +44,23 @@ export default {
   components: {
     ProductCard
   },
-  props: ["products", "totalPages", "categoryName", "loading"],
+  props: {
+    products: {
+      type: Array,
+      default: () => []
+    },
+    totalPages: {
+      type: Number,
+      default: 0
+    },
+    categoryName: {
+      type: Array,
+      default: () => {}
+    },
+    loading: {
+      type: Boolean
+    },
+  },
   data() {
     return {
       sortByAsc: false

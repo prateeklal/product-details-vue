@@ -60,12 +60,9 @@ export default {
   props: {
     id: {
       type: String,
-      default: ''
+      default: ""
     },
-    images: {
-      type: Object,
-      default: () => {}
-    },
+    images: Array,
     products: {
       type: Array,
       default: () => []

@@ -21,7 +21,17 @@
 
 <script>
 export default {
-  props: ["name", "loading", "cart"],
+  props: {
+    name: {
+      type: String,
+      default: ""
+    },
+    loading: Boolean,
+    cart: {
+      type: Array,
+      default: () => []
+    }
+  },
   computed: {
     totalItems() {
       return this.cart.reduce((accumulator, product) => {
