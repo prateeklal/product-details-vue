@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  props: ["notifyMsg"],
+  props: {
+    notifyMsg: {
+      type: String,
+      default: ''
+    },
+  },
   data() {
     return {
       showSnack: true,
