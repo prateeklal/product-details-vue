@@ -1,17 +1,30 @@
 <template>
   <aside>
     <h2>Shopping Cart</h2>
-    <div v-if="!cart.length" class="empty-cart">
+    <div
+      v-if="!cart.length"
+      class="empty-cart"
+    >
       No items in the cart.
     </div>
 
     <ul>
-      <li v-for="product in cart" :key="product.id" class="cart-item">
+      <li
+        v-for="product in cart"
+        :key="product.id"
+        class="cart-item"
+      >
         <figure class="col-3">
-          <img :src="product.thumb.href" :alt="product.thumb.alt" />
+          <img
+            :src="product.thumb.href"
+            :alt="product.thumb.alt"
+          >
         </figure>
         <div class="col-9">
-          <div class="item-title" v-html="product.name" />
+          <div
+            class="item-title"
+            v-html="product.name"
+          />
           <span class="item-qty">
             {{ product.price | currency }} x {{ product.qty }}
           </span>
@@ -33,7 +46,10 @@
       </li>
     </ul>
 
-    <div v-if="cart.length" class="cart-total">
+    <div
+      v-if="cart.length"
+      class="cart-total"
+    >
       Total: {{ totalPrice | currency }}
     </div>
   </aside>

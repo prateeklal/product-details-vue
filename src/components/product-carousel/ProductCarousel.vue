@@ -57,7 +57,20 @@
 
 <script>
 export default {
-  props: ["id", "images", "products"],
+  props: {
+    id: {
+      type: String,
+      default: ''
+    },
+    images: {
+      type: Object,
+      default: () => {}
+    },
+    products: {
+      type: Array,
+      default: () => []
+    }
+  },
 
   data() {
     return {

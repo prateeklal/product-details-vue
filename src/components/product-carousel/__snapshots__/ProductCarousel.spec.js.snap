@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductCarousel should render correctly 1`] = `
+<div class="modal-container">
+  <div class="modal">
+    <figure><img loading="eager" alt="" width="363" height="363"></figure> <button aria-label="Close the modal">
+      Close
+    </button>
+  </div>
+  <div class="chevron">
+    <!----> <button aria-label="Next Slide" class="next"><img src="https://www.westelm.com/weimgs/rk/images/wcm/products/202003/0005/belgian-linen-ladder-stripe-embroidery-duvet-cover-shams-6-m.jpg" alt="">
+      <v-icon name="chevron-right"></v-icon>
+    </button></div>
+</div>
+`;

@@ -17,7 +17,11 @@
       @addToCart="addToCart"
     />
 
-    <div v-show="displayCart" class="bg-overlay" @click.self="toggleCart" />
+    <div
+      v-show="displayCart"
+      class="bg-overlay"
+      @click.self="toggleCart"
+    />
     <transition name="slide-cart">
       <shopping-cart
         v-show="displayCart"
@@ -30,7 +34,10 @@
     </transition>
 
     <transition name="fade-snack">
-      <snack-bar v-if="notifyMsg" :notify-msg="notifyMsg" />
+      <snack-bar
+        v-if="notifyMsg"
+        :notify-msg="notifyMsg"
+      />
     </transition>
 
     <router-view :products="products" />

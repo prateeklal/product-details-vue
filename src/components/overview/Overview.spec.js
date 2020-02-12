@@ -1,20 +1,14 @@
 import { shallowMount } from '@vue/test-utils'
 import Overview from './Overview.vue';
-const localVue = global.localVue;
-const router = global.router;
+jest.mock('axios');
 
 describe('Overview', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Overview, { localVue, router });
+    wrapper = shallowMount(Overview);
   });
 
-  test('is a Vue instance', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
+  xit('should fetch products and update state', () => {
+    wrapper.vm.fetchProducts();
   });
-
-  xtest('fetchProducts when created', () => {
-    console.log(wrapper.attributes());
-    expect(wrapper.attributes.fetchProducts).toHaveBeenCalled();
-  })
 })

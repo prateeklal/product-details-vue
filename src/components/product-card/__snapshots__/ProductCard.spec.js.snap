@@ -3,18 +3,19 @@
 exports[`ProductCard renders correctly 1`] = `
 <article>
   <figure>
-    <router-link-stub to="[object Object]" tag="a" event="click"><img loading="lazy" alt="" width="363" aria-label="Main image of the product" data-src="https://www.westelm.com/weimgs/rk/images/wcm/products/202003/0005/belgian-linen-ladder-stripe-embroidery-duvet-cover-shams-s-m.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" lazy="loading"></router-link-stub>
+    <router-link to="[object Object]"><img loading="lazy" alt="" width="363" aria-label="Main image of the product"></router-link>
     <div class="thumbnail"><img src="https://www.westelm.com/weimgs/rk/images/wcm/products/202003/0005/belgian-linen-ladder-stripe-embroidery-duvet-cover-shams-6-m.jpg" alt=""><img src="https://www.westelm.com/weimgs/rk/images/wcm/products/202003/0012/belgian-linen-ladder-stripe-embroidery-duvet-cover-shams-m.jpg" alt=""></div>
   </figure>
   <div class="row article-body">
     <div class="col-8">
-      <router-link-stub to="[object Object]" tag="a" event="click">
+      <router-link to="[object Object]">
         <h3>Belgian Linen Ladder Stripe Embroidery Duvet Cover &amp; Shams - Slate/White</h3>
-      </router-link-stub>
-      <p tabindex="0"><span>Regular Price - $329.00</span></p>
+      </router-link>
+      <p tabindex="0"><span>Regular Price - 329</span></p>
     </div>
-    <div class="col-4 price"><em tabindex="0"><span>Now Price</span> <strong>$35.20</strong></em> <button aria-label="Add to cart">
-        <!----></button></div>
+    <div class="col-4 price"><em tabindex="0"><span>Now Price</span> <strong>35.2</strong></em> <button aria-label="Add to cart">
+        <v-icon name="shopping-cart"></v-icon>
+      </button></div>
   </div>
 </article>
 `;
