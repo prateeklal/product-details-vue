@@ -66,7 +66,7 @@ export default {
       totalPrice: 0,
       notifyMsg: "",
       displayCart: false,
-      loading: false
+      loading: true
     };
   },
 
@@ -76,7 +76,6 @@ export default {
 
   methods: {
     fetchProducts() {
-      this.loading = true;
       axios
         .get("/products")
         .then(res => {

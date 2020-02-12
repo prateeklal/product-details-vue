@@ -40,6 +40,7 @@
     },
     "collectCoverageFrom": [
       "src/**/*.{js,vue}",
+      "!src/App.vue",
       "!**/node_modules/**"
     ],
     "setupFiles": [
