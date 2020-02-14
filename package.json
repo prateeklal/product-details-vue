@@ -19,6 +19,10 @@
     "details",
     "vue"
   ],
+  "engines": {
+    "node": "^10.x",
+    "npm": "^6.x"
+  },
   "jest": {
     "moduleFileExtensions": [
       "js",
