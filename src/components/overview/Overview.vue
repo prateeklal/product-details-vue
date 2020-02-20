@@ -80,7 +80,7 @@ export default {
         .get("/products")
         .then(res => {
           this.category = res.data;
-          this.products = res.data.groups;
+          this.products = this.resetGroupsByPrice(res.data.groups);
           this.loading = false;
         })
         .catch(reject =>
@@ -88,12 +88,28 @@ export default {
         );
     },
 
+    resetGroupsByPrice(products) {
+      // Setting price property to all the products
+      // as not handling product collection in this case
+      return products.map(product => {
+        if (product.priceRange && !product.price) {
+          product.price = {
+            selling: product.priceRange.selling.low,
+            regular: product.priceRange.regular
+              ? product.priceRange.regular.high
+              : product.priceRange.selling.high
+          };
+        }
+        return product;
+      });
+    },
+
     sortByPrice(sortByAsc) {
       let products = Array.from(this.products);
 
       try {
         products.sort(
-          (a, b) => a.priceRange.selling.low - b.priceRange.selling.low
+          (a, b) => a.price.selling - b.price.selling
         );
         if (!sortByAsc) {
           products.reverse();

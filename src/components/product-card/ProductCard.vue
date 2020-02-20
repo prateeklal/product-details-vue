@@ -30,15 +30,18 @@
           <h3 v-html="product.name" />
         </router-link>
         <p tabindex="0">
-          <span>Regular Price - {{ regularPrice | currency }}</span>
+          <span>Regular Price - {{ product.price.regular | currency }}</span>
         </p>
       </div>
       <div class="col-4 price">
         <em tabindex="0">
           <span>Now Price</span>
-          <strong>{{ nowPrice | currency }}</strong>
+          <strong>{{ product.price.selling | currency }}</strong>
         </em>
-        <button aria-label="Add to cart" @click="addToCart">
+        <button
+          aria-label="Add to cart"
+          @click="addToCart"
+        >
           <v-icon name="shopping-cart" />
         </button>
       </div>
@@ -64,26 +67,6 @@ export default {
   },
 
   computed: {
-    nowPrice() {
-      if (this.product.price) {
-        return this.product.price.selling;
-      } else {
-        return (
-          this.product.priceRange &&
-          this.product.priceRange.selling &&
-          this.product.priceRange.selling.low
-        );
-      }
-    },
-    regularPrice() {
-      if (this.product.price) {
-        return this.product.price.regular;
-      } else {
-        return this.product.priceRange.regular
-          ? this.product.priceRange.regular.high
-          : this.product.priceRange.selling.high;
-      }
-    },
     paramsForCarousel() {
       return {
         name: "product-carousel",
