@@ -89,7 +89,7 @@ export default {
       const cartItems = {
         id: this.product.id,
         name: this.product.name,
-        price: this.nowPrice,
+        price: this.product.price.selling,
         thumb: this.product.thumbnail
       };
 
