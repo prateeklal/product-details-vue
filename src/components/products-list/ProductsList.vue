@@ -54,8 +54,8 @@ export default {
       default: 0
     },
     categoryName: {
-      type: Array,
-      default: () => {}
+      type: String,
+      default: ''
     },
     loading: {
       type: Boolean

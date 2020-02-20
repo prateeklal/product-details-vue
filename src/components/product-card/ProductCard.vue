@@ -38,10 +38,7 @@
           <span>Now Price</span>
           <strong>{{ nowPrice | currency }}</strong>
         </em>
-        <button
-          aria-label="Add to cart"
-          @click="addToCart"
-        >
+        <button aria-label="Add to cart" @click="addToCart">
           <v-icon name="shopping-cart" />
         </button>
       </div>
@@ -68,16 +65,24 @@ export default {
 
   computed: {
     nowPrice() {
-      return (
-        this.product.priceRange &&
-        this.product.priceRange.selling &&
-        this.product.priceRange.selling.low
-      );
+      if (this.product.price) {
+        return this.product.price.selling;
+      } else {
+        return (
+          this.product.priceRange &&
+          this.product.priceRange.selling &&
+          this.product.priceRange.selling.low
+        );
+      }
     },
     regularPrice() {
-      return this.product.priceRange.regular
-        ? this.product.priceRange.regular.high
-        : this.product.priceRange.selling.high;
+      if (this.product.price) {
+        return this.product.price.regular;
+      } else {
+        return this.product.priceRange.regular
+          ? this.product.priceRange.regular.high
+          : this.product.priceRange.selling.high;
+      }
     },
     paramsForCarousel() {
       return {
@@ -139,9 +144,11 @@ p {
   bottom: 0;
   width: 100%;
   text-align: center;
-  padding: em(5) 0;
+  padding: em(5) em(12);
   opacity: 0.2;
   transition: opacity 0.3s;
+  white-space: nowrap;
+  overflow-y: auto;
 }
 
 .thumbnail img {
