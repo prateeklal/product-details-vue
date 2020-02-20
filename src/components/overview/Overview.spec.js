@@ -31,33 +31,33 @@ describe('Overview', () => {
     const sortByAsc = true;
     wrapper.setData({
       products: [
-        { priceRange: { selling: { low: 12 } } },
-        { priceRange: { selling: { low: 13 } } },
-        { priceRange: { selling: { low: 16 } } },
-        { priceRange: { selling: { low: 11 } } },
+        { price: { selling: 12 } },
+        { price: { selling: 13 } },
+        { price: { selling: 16 } },
+        { price: { selling: 11 } },
       ]
     });
 
     wrapper.vm.sortByPrice(sortByAsc);
-    expect(wrapper.vm.products[0].priceRange.selling.low).toBe(11);
-    expect(wrapper.vm.products[2].priceRange.selling.low).toBe(13);
+    expect(wrapper.vm.products[0].price.selling).toBe(11);
+    expect(wrapper.vm.products[2].price.selling).toBe(13);
   });
 
   it('should sort products in descending order', () => {
     const sortByAsc = false;
     wrapper.setData({
       products: [
-        { priceRange: { selling: { low: 12 } } },
-        { priceRange: { selling: { low: 13 } } },
-        { priceRange: { selling: { low: 16 } } },
-        { priceRange: { selling: { low: 11 } } },
+        { price: { selling: 12 } },
+        { price: { selling: 13 } },
+        { price: { selling: 16 } },
+        { price: { selling: 11 } },
       ]
     });
 
     wrapper.vm.sortByPrice(sortByAsc);
-    expect(wrapper.vm.products[0].priceRange.selling.low).toBe(16);
-    expect(wrapper.vm.products[1].priceRange.selling.low).toBe(13);
-    expect(wrapper.vm.products[2].priceRange.selling.low).toBe(12);
+    expect(wrapper.vm.products[0].price.selling).toBe(16);
+    expect(wrapper.vm.products[1].price.selling).toBe(13);
+    expect(wrapper.vm.products[2].price.selling).toBe(12);
   });
 
   it('should toggle displayCart', () => {

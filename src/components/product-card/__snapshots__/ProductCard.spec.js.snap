@@ -13,7 +13,7 @@ exports[`ProductCard renders correctly 1`] = `
       </router-link>
       <p tabindex="0"><span>Regular Price - 329</span></p>
     </div>
-    <div class="col-4 price"><em tabindex="0"><span>Now Price</span> <strong>35.2</strong></em> <button aria-label="Add to cart">
+    <div class="col-4 price"><em tabindex="0"><span>Now Price</span> <strong>44</strong></em> <button aria-label="Add to cart">
         <v-icon name="shopping-cart"></v-icon>
       </button></div>
   </div>
