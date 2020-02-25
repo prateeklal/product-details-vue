@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server.js",
-    "build": "rm -rf dist && NODE_ENV=production webpack --progress && cp server.js dist/index.js",
+    "build": "rm -rf dist && NODE_ENV=production webpack --progress",
     "test": "jest --coverage",
     "test:dev": "jest --watchAll --coverage",
     "lint": "eslint --ext .js,.vue src"
