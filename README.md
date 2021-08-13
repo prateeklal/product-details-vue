@@ -8,7 +8,7 @@ An application built with VueJS + ExpressJS
 Clone the repo -
 
 ```bash
-git clone https://gitlab.mynisum.com/plal/product-details-demo.git
+git clone https://github.com/prateeklal/product-details-vue.git
 ```
 
 Install the dependencies. Ideal node env >= v10
