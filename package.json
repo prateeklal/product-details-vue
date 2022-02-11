@@ -81,7 +81,7 @@
     "jsdom": "^16.0.1",
     "jsdom-global": "^3.0.2",
     "mocha": "^7.0.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "opn": "^6.0.0",
     "sass-loader": "^8.0.2",
     "sinon": "^8.1.1",
