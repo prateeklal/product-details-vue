@@ -80,7 +80,7 @@
     "jest-serializer-vue": "^2.0.2",
     "jsdom": "^16.0.1",
     "jsdom-global": "^3.0.2",
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "node-sass": "^4.13.1",
     "opn": "^6.0.0",
     "sass-loader": "^8.0.2",
